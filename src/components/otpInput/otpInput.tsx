@@ -7,6 +7,7 @@ import handleOnChange from './methods/handleOnChange'
 import submitInputs from './methods/submitInputs'
 import useToggle from 'hooks/useToggle'
 import handleBackspace from './methods/handleBackSpace'
+import handleKeyDown from './methods/handleKeyDown'
 
 const OtpInput = ({ inputs }: Props) => {
   const { inputRefs, otpInputs } = useOtpInput(inputs)
@@ -42,6 +43,13 @@ const OtpInput = ({ inputs }: Props) => {
                 }
                 onKeyDown={(event) => {
                   handleBackspace({ item, keyValue: event.key, inputRefs })
+                  handleKeyDown({
+                    item,
+                    keyValue: event.key,
+                    inputRefs,
+                    isInputLengthInvalid,
+                    handleInputLengthValid,
+                  })
                 }}
               />
             ) : (
