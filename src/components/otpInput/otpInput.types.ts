@@ -29,6 +29,12 @@ type HandleKeyDownProps = {
   handleInputLengthValid: () => void
 }
 
+type HandlePasteProps = {
+  item: number
+  event: React.ClipboardEvent<HTMLInputElement>
+  inputRefs: InputRefsProps
+}
+
 type Props = {
   inputs: InputProps
 }
@@ -40,5 +46,6 @@ export type {
   HandleOnChangeProps,
   HandleBackspaceProps,
   HandleKeyDownProps,
+  HandlePasteProps,
   Props,
 }

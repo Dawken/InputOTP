@@ -8,6 +8,7 @@ import submitInputs from './methods/submitInputs'
 import useToggle from 'hooks/useToggle'
 import handleBackspace from './methods/handleBackSpace'
 import handleKeyDown from './methods/handleKeyDown'
+import handlePaste from './methods/handlePaste'
 
 const OtpInput = ({ inputs }: Props) => {
   const { inputRefs, otpInputs } = useOtpInput(inputs)
@@ -51,6 +52,7 @@ const OtpInput = ({ inputs }: Props) => {
                     handleInputLengthValid,
                   })
                 }}
+                onPaste={(event) => handlePaste({ item, event, inputRefs })}
               />
             ) : (
               <div className='text-4xl' key={index}>
