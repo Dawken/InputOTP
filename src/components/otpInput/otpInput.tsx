@@ -22,7 +22,7 @@ const OtpInput = ({ inputs }: Props) => {
   return (
     <div className='flex flex-col justify-center items-center gap-5'>
       <div className='flex flex-col justify-center items-center'>
-        <div className='flex justify-center items-center '>
+        <div className='flex justify-center items-center flex-wrap'>
           {otpInputs.map((item, index) => {
             return typeof item === 'number' ? (
               <input
