@@ -2,6 +2,7 @@
 import React from 'react'
 import useOtpInput from './useOtpInput'
 import { Props } from './otpInput.types'
+import handleOnChange from './methods/handleOnChange'
 
 const OtpInput = ({ inputs }: Props) => {
   const { inputRefs, otpInputs } = useOtpInput(inputs)
@@ -19,6 +20,7 @@ const OtpInput = ({ inputs }: Props) => {
                 ref={(ref) => {
                   inputRefs.current[item] = ref as HTMLInputElement
                 }}
+                onChange={() => handleOnChange(item, inputRefs)}
               />
             ) : (
               <div className='text-4xl' key={index}>
