@@ -15,6 +15,12 @@ type HandleOnChangeProps = {
   handleInputLengthValid: () => void
 }
 
+type HandleBackspaceProps = {
+  item: number
+  keyValue: string
+  inputRefs: InputRefsProps
+}
+
 type Props = {
   inputs: InputProps
 }
@@ -24,5 +30,6 @@ export type {
   InputRefsProps,
   SubmitInputsProps,
   HandleOnChangeProps,
+  HandleBackspaceProps,
   Props,
 }

@@ -6,6 +6,7 @@ import ErrorIcon from '@mui/icons-material/Error'
 import handleOnChange from './methods/handleOnChange'
 import submitInputs from './methods/submitInputs'
 import useToggle from 'hooks/useToggle'
+import handleBackspace from './methods/handleBackSpace'
 
 const OtpInput = ({ inputs }: Props) => {
   const { inputRefs, otpInputs } = useOtpInput(inputs)
@@ -39,6 +40,9 @@ const OtpInput = ({ inputs }: Props) => {
                     handleInputLengthValid,
                   })
                 }
+                onKeyDown={(event) => {
+                  handleBackspace({ item, keyValue: event.key, inputRefs })
+                }}
               />
             ) : (
               <div className='text-4xl' key={index}>
