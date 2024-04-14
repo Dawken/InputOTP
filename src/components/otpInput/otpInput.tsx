@@ -30,7 +30,9 @@ const OtpInput = ({ inputs }: Props) => {
                 } outline-none bg-zinc-900 focus:border-indigo-400 transition-colors duration-200 ease-in-out`}
                 key={index}
                 ref={(ref) => {
-                  inputRefs.current[item] = ref as HTMLInputElement
+                  if (ref) {
+                    inputRefs.current[item] = ref
+                  }
                 }}
                 onChange={() => handleOnChange({ item })}
                 onKeyDown={(event) => {
@@ -40,6 +42,7 @@ const OtpInput = ({ inputs }: Props) => {
                 onPaste={(event) => handlePaste({ item, event })}
               />
             ) : (
+              // I use index as a key because i assume array will not change, otherwise i would generate id
               <div className='text-4xl' key={index}>
                 {item}
               </div>
