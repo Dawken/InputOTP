@@ -1,23 +1,20 @@
 'use client'
 import React from 'react'
-import useOtpInput from './useOtpInput'
+import useOtpInput from './otpInput.hooks'
 import { Props } from './otpInput.types'
 import ErrorIcon from '@mui/icons-material/Error'
-import handleOnChange from './methods/handleOnChange'
-import submitInputs from './methods/submitInputs'
-import useToggle from 'hooks/useToggle'
-import handleBackspace from './methods/handleBackspace'
-import handleKeyDown from './methods/handleKeyDown'
-import handlePaste from './methods/handlePaste'
 
 const OtpInput = ({ inputs }: Props) => {
-  const { inputRefs, otpInputs } = useOtpInput(inputs)
-
   const {
-    value: isInputLengthInvalid,
-    setTrue: handleInputLengthInvalid,
-    setFalse: handleInputLengthValid,
-  } = useToggle()
+    inputRefs,
+    otpInputs,
+    isInputLengthInvalid,
+    handleKeyDown,
+    submitInputs,
+    handleBackspace,
+    handleOnChange,
+    handlePaste,
+  } = useOtpInput(inputs)
 
   return (
     <div className='flex flex-col justify-center items-center gap-5'>
@@ -35,25 +32,12 @@ const OtpInput = ({ inputs }: Props) => {
                 ref={(ref) => {
                   inputRefs.current[item] = ref as HTMLInputElement
                 }}
-                onChange={() =>
-                  handleOnChange({
-                    item,
-                    inputRefs,
-                    isInputLengthInvalid,
-                    handleInputLengthValid,
-                  })
-                }
+                onChange={() => handleOnChange({ item })}
                 onKeyDown={(event) => {
-                  handleBackspace({ item, keyValue: event.key, inputRefs })
-                  handleKeyDown({
-                    item,
-                    event,
-                    inputRefs,
-                    isInputLengthInvalid,
-                    handleInputLengthValid,
-                  })
+                  handleBackspace({ item, keyValue: event.key })
+                  handleKeyDown({ item, event })
                 }}
-                onPaste={(event) => handlePaste({ item, event, inputRefs })}
+                onPaste={(event) => handlePaste({ item, event })}
               />
             ) : (
               <div className='text-4xl' key={index}>
@@ -73,9 +57,7 @@ const OtpInput = ({ inputs }: Props) => {
       </div>
       <button
         className='flex justify-center text-lg font-medium bg-indigo-700 w-64 rounded p-1.5'
-        onClick={() =>
-          submitInputs({ inputRefs, otpInputs, handleInputLengthInvalid })
-        }
+        onClick={submitInputs}
       >
         Continue
       </button>
