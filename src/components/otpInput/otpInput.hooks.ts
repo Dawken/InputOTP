@@ -53,6 +53,10 @@ const useOtpInput = (inputs: InputProps) => {
 
     const keyValue = event.key
 
+    if (event.key === 'Enter') {
+      submitInputs()
+    }
+
     if (keyValue === 'ArrowLeft' && item > 0) {
       previousInput.focus()
     } else if (
