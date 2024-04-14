@@ -27,6 +27,7 @@ const OtpInput = ({ inputs }: Props) => {
             return typeof item === 'number' ? (
               <input
                 maxLength={1}
+                inputMode='numeric'
                 className={`w-10 h-12 rounded m-2 text-center capitalize text-2xl border-[1px] ${
                   isInputLengthInvalid ? 'border-rose-500' : 'border-black/35'
                 } outline-none bg-zinc-900 focus:border-indigo-400 transition-colors duration-200 ease-in-out`}
