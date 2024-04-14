@@ -6,7 +6,7 @@ import ErrorIcon from '@mui/icons-material/Error'
 import handleOnChange from './methods/handleOnChange'
 import submitInputs from './methods/submitInputs'
 import useToggle from 'hooks/useToggle'
-import handleBackspace from './methods/handleBackSpace'
+import handleBackspace from './methods/handleBackspace'
 import handleKeyDown from './methods/handleKeyDown'
 import handlePaste from './methods/handlePaste'
 
@@ -46,7 +46,7 @@ const OtpInput = ({ inputs }: Props) => {
                   handleBackspace({ item, keyValue: event.key, inputRefs })
                   handleKeyDown({
                     item,
-                    keyValue: event.key,
+                    event,
                     inputRefs,
                     isInputLengthInvalid,
                     handleInputLengthValid,

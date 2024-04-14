@@ -23,7 +23,7 @@ type HandleBackspaceProps = {
 
 type HandleKeyDownProps = {
   item: number
-  keyValue: string
+  event: React.KeyboardEvent<HTMLInputElement>
   inputRefs: InputRefsProps
   isInputLengthInvalid: boolean
   handleInputLengthValid: () => void
