@@ -1,3 +1,5 @@
+import { KeyboardEvent, ClipboardEvent } from 'react'
+
 type InputProps = (string | number)[]
 
 type InputRefsProps = React.MutableRefObject<HTMLInputElement[]>
@@ -13,12 +15,12 @@ type HandleBackspaceProps = {
 
 type HandleKeyDownProps = {
   item: number
-  event: React.KeyboardEvent<HTMLInputElement>
+  event: KeyboardEvent<HTMLInputElement>
 }
 
 type HandlePasteProps = {
   item: number
-  event: React.ClipboardEvent<HTMLInputElement>
+  event: ClipboardEvent<HTMLInputElement>
 }
 
 type Props = {
