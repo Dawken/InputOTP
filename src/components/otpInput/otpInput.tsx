@@ -1,23 +1,20 @@
 'use client'
 import React from 'react'
-import useOtpInput from './useOtpInput'
+import useOtpInput from './otpInput.hooks'
 import { Props } from './otpInput.types'
 import ErrorIcon from '@mui/icons-material/Error'
-import handleOnChange from './methods/handleOnChange'
-import submitInputs from './methods/submitInputs'
-import useToggle from 'hooks/useToggle'
-import handleBackspace from './methods/handleBackSpace'
-import handleKeyDown from './methods/handleKeyDown'
-import handlePaste from './methods/handlePaste'
 
 const OtpInput = ({ inputs }: Props) => {
-  const { inputRefs, otpInputs } = useOtpInput(inputs)
-
   const {
-    value: isInputLengthInvalid,
-    setTrue: handleInputLengthInvalid,
-    setFalse: handleInputLengthValid,
-  } = useToggle()
+    inputRefs,
+    otpInputs,
+    isInputLengthInvalid,
+    handleKeyDown,
+    submitInputs,
+    handleBackspace,
+    handleOnChange,
+    handlePaste,
+  } = useOtpInput(inputs)
 
   return (
     <div className='flex flex-col justify-center items-center gap-5'>
@@ -27,34 +24,25 @@ const OtpInput = ({ inputs }: Props) => {
             return typeof item === 'number' ? (
               <input
                 maxLength={1}
+                inputMode='numeric'
                 className={`w-10 h-12 rounded m-2 text-center capitalize text-2xl border-[1px] ${
                   isInputLengthInvalid ? 'border-rose-500' : 'border-black/35'
                 } outline-none bg-zinc-900 focus:border-indigo-400 transition-colors duration-200 ease-in-out`}
                 key={index}
                 ref={(ref) => {
-                  inputRefs.current[item] = ref as HTMLInputElement
+                  if (ref) {
+                    inputRefs.current[item] = ref
+                  }
                 }}
-                onChange={() =>
-                  handleOnChange({
-                    item,
-                    inputRefs,
-                    isInputLengthInvalid,
-                    handleInputLengthValid,
-                  })
-                }
+                onChange={() => handleOnChange({ item })}
                 onKeyDown={(event) => {
-                  handleBackspace({ item, keyValue: event.key, inputRefs })
-                  handleKeyDown({
-                    item,
-                    keyValue: event.key,
-                    inputRefs,
-                    isInputLengthInvalid,
-                    handleInputLengthValid,
-                  })
+                  handleBackspace({ item, keyValue: event.key })
+                  handleKeyDown({ item, event })
                 }}
-                onPaste={(event) => handlePaste({ item, event, inputRefs })}
+                onPaste={(event) => handlePaste({ item, event })}
               />
             ) : (
+              // I use index as a key because i assume array will not change, otherwise i would generate id
               <div className='text-4xl' key={index}>
                 {item}
               </div>
@@ -72,9 +60,7 @@ const OtpInput = ({ inputs }: Props) => {
       </div>
       <button
         className='flex justify-center text-lg font-medium bg-indigo-700 w-64 rounded p-1.5'
-        onClick={() =>
-          submitInputs({ inputRefs, otpInputs, handleInputLengthInvalid })
-        }
+        onClick={submitInputs}
       >
         Continue
       </button>
